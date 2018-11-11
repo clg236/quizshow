@@ -1,28 +1,43 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Grid from '@material-ui/core/Grid';
+import Question from './Components/Question';
+import quizQuestions from './API/QuizQuestions';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    //this state should contain anything that may trigger a UI update
+    this.state = {
+      score: 0,
+      question: quizQuestions[0].question,
+      questionId: 0,
+      answerOptions: quizQuestions[0].answers,
+      answer: null,
+    };
+
+    //One thing to note here is that we actually need to hard bind our event handlers in the render function
+    //this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
+
+  }
+
+  handleAnswerClicked = () => {
+    alert("selected!");
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Grid container justify="center">
+      <Question 
+          answer={this.state.answer}
+          answerOptions={this.state.answerOptions}
+          questionId={this.state.questionId}
+          question={this.state.question}
+          questionTotal={quizQuestions.length}
+          onAnswerClicked={this.handleAnswerClicked}
+        />
+      </Grid>
     );
   }
-}
+};
 
 export default App;
