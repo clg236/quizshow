@@ -11,20 +11,34 @@ class App extends Component {
     this.state = {
       score: 0,
       question: quizQuestions[0].question,
-      questionId: 0,
       answerOptions: quizQuestions[0].answers,
-      answer: null
+      answer:''
     };
 
-    //One thing to note here is that if we did not use the arrow function in handleAnswerClicked, so we 
+    //One thing to note here is that we did not use the arrow function in handleAnswerClicked, so we 
     //need to hard bind our event handlers in the render function:
     this.handleAnswerClicked = this.handleAnswerClicked.bind(this);
 
   }
+
+  //our lifecycle events
+  componentWillMount() {
+    const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));  
+
+    this.setState({
+      question: quizQuestions[0].question,
+      answerOptions: shuffledAnswerOptions[0]
+    });
+  }
   
   handleAnswerClicked(event) {
-    alert("selected!");
-    this.setState({answer: event.target.value});
+    this.setState({answer: event.currentTarget.value});
+    alert("selected: " + event.currentTarget.value);
+  }
+
+  //how about a random function to set the question and answers?
+  randomQuestion() = {
+
   }
 
   render() {
@@ -33,7 +47,6 @@ class App extends Component {
       <Question 
           answer={this.state.answer}
           answerOptions={this.state.answerOptions}
-          questionId={this.state.questionId}
           question={this.state.question}
           questionTotal={quizQuestions.length}
           onAnswerClicked={this.handleAnswerClicked}
