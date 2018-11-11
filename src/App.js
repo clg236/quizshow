@@ -3,7 +3,10 @@ import Grid from '@material-ui/core/Grid';
 import Question from './Components/Question';
 import Score from './Components/Score';
 import quizQuestions from './API/QuizQuestions';
+import firebase from './firebase';
 
+//our firebase database!
+let database = firebase.database();
 
 class App extends Component {
   constructor(props) {
@@ -11,11 +14,11 @@ class App extends Component {
 
     //this state should contain anything that may trigger a UI update
     this.state = {
+      playerName: 'Bob Ross',
       score: 0,
       questionId: quizQuestions[0].id,
       question: quizQuestions[0].question,
-      answerOptions: quizQuestions[0].answers,
-      answer: []
+      answerOptions: quizQuestions[0].answers
     };
 
     //One thing to note here is that we did not use the arrow function in handleAnswerClicked, so we 
@@ -25,12 +28,22 @@ class App extends Component {
 
   //our lifecycle event (we'll do this when the component mounts)
   componentWillMount() {
-    const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));  
+    const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));
+
+    //challenge: use the shuffle array function to shuffle the questions as well as their options
 
     this.setState({
       question: quizQuestions[0].question,
       answerOptions: shuffledAnswerOptions[0]
     });
+
+    //push our state to FB when we mount the component
+    database.ref().push(this.state);
+  }
+
+  //when our component unmounts from the DOM
+  componentWillUnmount() {
+    //disconnect from FB
   }
 
  //how about a random function to set the question and answers?
@@ -61,14 +74,20 @@ class App extends Component {
     //update our score by one
     if(answer) {
       this.setState({score: this.state.score + 1});
-      console.log(this.state.score);
+    } else {
+      this.setState({score: this.state.score - 1});
     }
 
+    //add this score to FB
+    database.ref().push(this.state.score)
   }
  
   render() {
     return (
       <Grid container spacing={24} direction="column" justify="space-evenly" alignItems="center">
+        <Grid item>
+          <h1>Player: {this.state.playerName}</h1>  
+        </Grid>
         <Grid item>
           <Question
               id={this.state.questionId} 
