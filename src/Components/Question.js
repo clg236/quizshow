@@ -16,7 +16,7 @@ function Question(props) {
         <p>{props.question}</p>
       </CardContent>
       <CardActions>
-          <Answers answers={props.answerOptions} onClick={props.onAnswerClicked}/>
+          <Answers answers={props.answerOptions} id={props.questionId} onClick={props.onAnswerClicked}/>
       </CardActions>
     </Card>
   );

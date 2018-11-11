@@ -10,9 +10,10 @@ class App extends Component {
     //this state should contain anything that may trigger a UI update
     this.state = {
       score: 0,
+      questionId: quizQuestions[0].id,
       question: quizQuestions[0].question,
       answerOptions: quizQuestions[0].answers,
-      answer:''
+      answer: []
     };
 
     //One thing to note here is that we did not use the arrow function in handleAnswerClicked, so we 
@@ -47,22 +48,22 @@ class App extends Component {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
-  
+
   //shuffle complete!
   return array;
 };
   
   handleAnswerClicked(event) {
     this.setState({answer: event.currentTarget.value});
-    alert("selected: " + event.currentTarget.value);
-  }
+    //let's increment the score by one if they get it correct (ternary operator)
 
+  };
  
-
   render() {
     return (
       <Grid container justify="center">
-      <Question 
+      <Question
+          id={this.state.questionId} 
           answer={this.state.answer}
           answerOptions={this.state.answerOptions}
           question={this.state.question}

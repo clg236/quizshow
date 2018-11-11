@@ -1,5 +1,6 @@
 let quizQuestions = [
     {
+        id: 1,
         question: "What is my name?",
         answers: [
             {
@@ -17,18 +18,19 @@ let quizQuestions = [
         ]
     },
     {
+        id: 2,
         question: "What is the greatest video game of all time?",
         answers: [
             {
-                type: "Microsoft",
+                correct: 0,
                 content: "Half-Life 2"
             },
             {
-                type: "Nintendo",
+                correct: 0,
                 content: "Halo"
             },
             {
-                type: "Sony",
+                correct: 1,
                 content: "Baldur's Gate 2: Shadows of Amn"
             }
         ]
