@@ -21,7 +21,7 @@ class App extends Component {
 
   }
 
-  //our lifecycle events
+  //our lifecycle event (we'll do this when the component mounts)
   componentWillMount() {
     const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));  
 
@@ -30,16 +30,34 @@ class App extends Component {
       answerOptions: shuffledAnswerOptions[0]
     });
   }
+
+ //how about a random function to set the question and answers?
+ shuffleArray(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element and reduce our count by one
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  
+  //shuffle complete!
+  return array;
+};
   
   handleAnswerClicked(event) {
     this.setState({answer: event.currentTarget.value});
     alert("selected: " + event.currentTarget.value);
   }
 
-  //how about a random function to set the question and answers?
-  randomQuestion() = {
-
-  }
+ 
 
   render() {
     return (
