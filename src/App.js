@@ -6,22 +6,25 @@ import quizQuestions from './API/QuizQuestions';
 class App extends Component {
   constructor(props) {
     super(props);
+
     //this state should contain anything that may trigger a UI update
     this.state = {
       score: 0,
       question: quizQuestions[0].question,
       questionId: 0,
       answerOptions: quizQuestions[0].answers,
-      answer: null,
+      answer: null
     };
 
-    //One thing to note here is that we actually need to hard bind our event handlers in the render function
-    //this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
+    //One thing to note here is that if we did not use the arrow function in handleAnswerClicked, so we 
+    //need to hard bind our event handlers in the render function:
+    this.handleAnswerClicked = this.handleAnswerClicked.bind(this);
 
   }
-
-  handleAnswerClicked = () => {
+  
+  handleAnswerClicked(event) {
     alert("selected!");
+    this.setState({answer: event.target.value});
   }
 
   render() {

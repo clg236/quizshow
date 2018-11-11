@@ -10,7 +10,7 @@ function Answers(props) {
         <div>
             {/* here we use that arrap.map method to map over our array of answers and create a button for each that 
             displays the content value */}
-            {props.answers.map(x => <Button size="large" onClick={props.onClick }>{x.content}</Button>)}
+            {props.answers.map(x => <Button size="large" value="yo!" onClick={props.onClick }>{x.content}</Button>)}
         </div>
     )
 }

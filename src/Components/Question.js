@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Answers from './Answers';
 
 
-//this is a stateless functional component (that's why we don't make it a class)
+//this is a STATELESS FUNCTIONAL COMPONENT (that's why we don't make it a class)
 //it is merely presentational, we will pass everything into this component as props
 
 function Question(props) {
@@ -16,7 +16,7 @@ function Question(props) {
         <p>{props.question}</p>
       </CardContent>
       <CardActions>
-          <Answers answers={props.answerOptions} onClick={props.onAnswerClicked.bind(this)}/>
+          <Answers answers={props.answerOptions} onClick={props.onAnswerClicked}/>
       </CardActions>
     </Card>
   );
