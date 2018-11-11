@@ -13,8 +13,11 @@ function Answers(props) {
             
             {/* here we use that arrap.map method to map over our array of answers and create a button for each that 
             displays the content value, it also sends back the correct key value for the clicked button */}
-            {props.answers.map(x => <Button size="large" value={x.content} id={props.id} onClick={props.onClick.bind(this, x.correct)}>{x.content}</Button>)}
-            
+            {
+                props.answers.map(
+                    (answer, index) => <Button key={index} size="large" data-answer-id={index} value={answer.content} onClick={props.onClick.bind(null)}>{answer.content}</Button>
+                )
+            }
         </div>
     )
 }

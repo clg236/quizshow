@@ -54,13 +54,25 @@ class App extends Component {
   return array;
 };
   
-  handleAnswerClicked(answer) {
-    //make sure we're getting true
-    answer ? console.log('true') : console.log('false');
+  handleAnswerClicked(event) {
+    // which question?
+    let question = quizQuestions.find(q => q.id === this.state.questionId);
 
+    if (!question) {
+      return ;
+    }
+    
+    // answer id
+    let answerId = event.currentTarget.getAttribute('data-answer-id');
+    if (answerId >= question.answers.length) {
+      return ;
+    }
+
+    let correct = question.answers[answerId].correct;
+    
     //update our score by one
-    if(answer) {
-      this.setState({score: this.state.score + 1});
+    if (correct) {
+      this.setState({score: ++this.state.score});
       console.log(this.state.score);
     }
 
