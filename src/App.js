@@ -29,7 +29,6 @@ class App extends Component {
   //our lifecycle event (we'll do this when the component mounts)
   componentWillMount() {
     const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));
-
     //challenge: use the shuffle array function to shuffle the questions as well as their options
 
     this.setState({
@@ -38,7 +37,7 @@ class App extends Component {
     });
 
     //push our state to FB when we mount the component
-    database.ref().push(this.state);
+    //database.ref('game').push(this.state);
   }
 
   //when our component unmounts from the DOM
@@ -79,9 +78,9 @@ class App extends Component {
     }
 
     //add this score to FB
-    database.ref().push(this.state.score)
+    //database.ref('game').push(this.state.score)
   }
- 
+  
   render() {
     return (
       <Grid container spacing={24} direction="column" justify="space-evenly" alignItems="center">
